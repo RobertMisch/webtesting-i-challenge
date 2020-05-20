@@ -24,4 +24,37 @@ describe("enhancer", () => {
             expect(enhancer.repair(testItem).durability).toBe(100);
         });
     })
+    describe("succeed()", () => {
+
+        it("should make enhancements +1", () => {
+            expect(enhancer.succeed(testItem).enhancments).toBe(1);
+        });
+        it("should make enhancements +20", () => {
+            testItem.enhancments=20
+            expect(enhancer.succeed(testItem).enhancments).toBe(20);
+        });
+        it("durability shouldnt change", () => {
+            expect(enhancer.succeed(testItem).durability).toBe(20);
+        });
+    })
+    describe("fail()", () => {
+
+        it("should decrease durability by 5", () => {
+            testItem.enhancments=10
+            expect(enhancer.fail(testItem).durability).toBe(15);
+        });
+        it("should decrease durability by 10 when over/equal 15", () => {
+            testItem.enhancments=15
+            expect(enhancer.fail(testItem).durability).toBe(10);
+        });
+        it("should decrease durability by 10 when over 16", () => {
+            testItem.enhancments=17
+            expect(enhancer.fail(testItem).durability).toBe(10);
+        });
+        it("should decrease enchantment by 1 when over 16", () => {
+            testItem.enhancments=17
+            expect(enhancer.fail(testItem).enhancments).toBe(16);
+        });
+    })
+    
 })
