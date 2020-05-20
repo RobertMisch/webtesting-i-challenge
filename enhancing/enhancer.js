@@ -16,6 +16,7 @@ function succeed(item) {
 }
 
 function fail(item) {
+  // the if/else way
   if(item.enhancments<15){
     return { ...item, durability:item.durability-5 };
   }
@@ -34,5 +35,10 @@ function repair(item) {
 }
 
 function get(item) {
-  return { ...item };
+  if(item.enhancments <= 0){
+    return { ...item };
+  }else{
+    return{...item, name:`[${item.enhancments}]${item.name}`}
+  }
+  
 }
